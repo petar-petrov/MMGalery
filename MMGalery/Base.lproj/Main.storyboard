@@ -1,25 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Image Details View Controller-->
+        <scene sceneID="scE-Md-EPj">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageDetails" id="xY2-pu-dGm" customClass="MMImageDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="6h9-4L-1C9"/>
+                        <viewControllerLayoutGuide type="bottom" id="wJv-CW-bAE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="ah3-Iw-ZVR">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vIy-Mj-HaB">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vIy-Mj-HaB" secondAttribute="height" multiplier="1:1" id="3eT-AG-dx3"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3eT-AG-dx3"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vIy-Mj-HaB" firstAttribute="leading" secondItem="ah3-Iw-ZVR" secondAttribute="leading" id="2xC-v9-VIW"/>
+                            <constraint firstAttribute="trailing" secondItem="vIy-Mj-HaB" secondAttribute="trailing" id="Avr-6W-12g"/>
+                            <constraint firstItem="wJv-CW-bAE" firstAttribute="top" secondItem="vIy-Mj-HaB" secondAttribute="bottom" id="xZQ-zy-A7L"/>
+                            <constraint firstItem="vIy-Mj-HaB" firstAttribute="top" secondItem="6h9-4L-1C9" secondAttribute="bottom" id="znW-3U-UfW"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="scrollView" destination="vIy-Mj-HaB" id="lOa-Ro-aZS"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hfd-OA-PVY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="640" y="343"/>
         </scene>
     </scenes>
 </document>

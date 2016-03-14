@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-MMGalery.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Reachability.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>objectiveflickr.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0C77702643B7636878681186FBE04D65</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>52A6B8883EEA46CAA1B0FD95470F0C64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>63710DEDC32FACF0F409295945E83179</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7E541DB54EDDCF73D6CC979B37313340</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

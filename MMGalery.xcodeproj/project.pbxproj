@@ -7,14 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D9953C075AB3A7E2C7A9698 /* libPods-MMGalery.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 613D634475746BFADE2B97BC /* libPods-MMGalery.a */; };
+		D1240C801C8DAF2100775B8D /* MMFlickrManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D1240C7F1C8DAF2100775B8D /* MMFlickrManager.m */; };
+		D1240C831C8DD01F00775B8D /* UIImageView+Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = D1240C821C8DD01F00775B8D /* UIImageView+Networking.m */; };
+		D1240C861C8DF00000775B8D /* MMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1240C851C8DF00000775B8D /* MMImageView.m */; };
+		D1240C891C9037E900775B8D /* MMImageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1240C881C9037E900775B8D /* MMImageDetailsViewController.m */; };
+		D1240C8C1C90414A00775B8D /* MMFlickrImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D1240C8B1C90414A00775B8D /* MMFlickrImage.m */; };
 		D1D990781C806FCE00BCEF5C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D990771C806FCE00BCEF5C /* main.m */; };
 		D1D9907B1C806FCE00BCEF5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D9907A1C806FCE00BCEF5C /* AppDelegate.m */; };
-		D1D9907E1C806FCE00BCEF5C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D9907D1C806FCE00BCEF5C /* ViewController.m */; };
+		D1D9907E1C806FCE00BCEF5C /* MMImageBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D9907D1C806FCE00BCEF5C /* MMImageBoardViewController.m */; };
 		D1D990811C806FCE00BCEF5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1D9907F1C806FCE00BCEF5C /* Main.storyboard */; };
 		D1D990831C806FCE00BCEF5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1D990821C806FCE00BCEF5C /* Assets.xcassets */; };
 		D1D990861C806FCE00BCEF5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1D990841C806FCE00BCEF5C /* LaunchScreen.storyboard */; };
 		D1D990911C806FCE00BCEF5C /* MMGaleryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D990901C806FCE00BCEF5C /* MMGaleryTests.m */; };
 		D1D9909C1C806FCE00BCEF5C /* MMGaleryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D9909B1C806FCE00BCEF5C /* MMGaleryUITests.m */; };
+		D1D990AB1C80739200BCEF5C /* MMImagesBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D990AA1C80739200BCEF5C /* MMImagesBoardView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,12 +42,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		613D634475746BFADE2B97BC /* libPods-MMGalery.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MMGalery.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88917BBB32FCDC30284E5DEB /* Pods-MMGalery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMGalery.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MMGalery/Pods-MMGalery.debug.xcconfig"; sourceTree = "<group>"; };
+		D1240C7E1C8DAF2100775B8D /* MMFlickrManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMFlickrManager.h; sourceTree = "<group>"; };
+		D1240C7F1C8DAF2100775B8D /* MMFlickrManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMFlickrManager.m; sourceTree = "<group>"; };
+		D1240C811C8DD01F00775B8D /* UIImageView+Networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Networking.h"; sourceTree = "<group>"; };
+		D1240C821C8DD01F00775B8D /* UIImageView+Networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Networking.m"; sourceTree = "<group>"; };
+		D1240C841C8DF00000775B8D /* MMImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMImageView.h; sourceTree = "<group>"; };
+		D1240C851C8DF00000775B8D /* MMImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMImageView.m; sourceTree = "<group>"; };
+		D1240C871C9037E900775B8D /* MMImageDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMImageDetailsViewController.h; sourceTree = "<group>"; };
+		D1240C881C9037E900775B8D /* MMImageDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMImageDetailsViewController.m; sourceTree = "<group>"; };
+		D1240C8A1C90414A00775B8D /* MMFlickrImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMFlickrImage.h; sourceTree = "<group>"; };
+		D1240C8B1C90414A00775B8D /* MMFlickrImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMFlickrImage.m; sourceTree = "<group>"; };
 		D1D990731C806FCE00BCEF5C /* MMGalery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMGalery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D990771C806FCE00BCEF5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D1D990791C806FCE00BCEF5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D1D9907A1C806FCE00BCEF5C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D1D9907C1C806FCE00BCEF5C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D1D9907D1C806FCE00BCEF5C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D1D9907C1C806FCE00BCEF5C /* MMImageBoardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMImageBoardViewController.h; sourceTree = "<group>"; };
+		D1D9907D1C806FCE00BCEF5C /* MMImageBoardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMImageBoardViewController.m; sourceTree = "<group>"; };
 		D1D990801C806FCE00BCEF5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D1D990821C806FCE00BCEF5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1D990851C806FCE00BCEF5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +70,9 @@
 		D1D990971C806FCE00BCEF5C /* MMGaleryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MMGaleryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D9909B1C806FCE00BCEF5C /* MMGaleryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMGaleryUITests.m; sourceTree = "<group>"; };
 		D1D9909D1C806FCE00BCEF5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1D990A91C80739200BCEF5C /* MMImagesBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMImagesBoardView.h; sourceTree = "<group>"; };
+		D1D990AA1C80739200BCEF5C /* MMImagesBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMImagesBoardView.m; sourceTree = "<group>"; };
+		E1E826288663879E1E6C6298 /* Pods-MMGalery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMGalery.release.xcconfig"; path = "Pods/Target Support Files/Pods-MMGalery/Pods-MMGalery.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D9953C075AB3A7E2C7A9698 /* libPods-MMGalery.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +101,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		47FF70D410EBC1BDD27529FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				613D634475746BFADE2B97BC /* libPods-MMGalery.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D1D9906A1C806FCE00BCEF5C = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +116,8 @@
 				D1D9908F1C806FCE00BCEF5C /* MMGaleryTests */,
 				D1D9909A1C806FCE00BCEF5C /* MMGaleryUITests */,
 				D1D990741C806FCE00BCEF5C /* Products */,
+				F8C060832157BDBF458CE2AB /* Pods */,
+				47FF70D410EBC1BDD27529FD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,13 +136,25 @@
 			children = (
 				D1D990791C806FCE00BCEF5C /* AppDelegate.h */,
 				D1D9907A1C806FCE00BCEF5C /* AppDelegate.m */,
-				D1D9907C1C806FCE00BCEF5C /* ViewController.h */,
-				D1D9907D1C806FCE00BCEF5C /* ViewController.m */,
+				D1D9907C1C806FCE00BCEF5C /* MMImageBoardViewController.h */,
+				D1D9907D1C806FCE00BCEF5C /* MMImageBoardViewController.m */,
+				D1240C811C8DD01F00775B8D /* UIImageView+Networking.h */,
+				D1240C821C8DD01F00775B8D /* UIImageView+Networking.m */,
 				D1D9907F1C806FCE00BCEF5C /* Main.storyboard */,
 				D1D990821C806FCE00BCEF5C /* Assets.xcassets */,
 				D1D990841C806FCE00BCEF5C /* LaunchScreen.storyboard */,
 				D1D990871C806FCE00BCEF5C /* Info.plist */,
 				D1D990761C806FCE00BCEF5C /* Supporting Files */,
+				D1D990A91C80739200BCEF5C /* MMImagesBoardView.h */,
+				D1D990AA1C80739200BCEF5C /* MMImagesBoardView.m */,
+				D1240C7E1C8DAF2100775B8D /* MMFlickrManager.h */,
+				D1240C7F1C8DAF2100775B8D /* MMFlickrManager.m */,
+				D1240C841C8DF00000775B8D /* MMImageView.h */,
+				D1240C851C8DF00000775B8D /* MMImageView.m */,
+				D1240C871C9037E900775B8D /* MMImageDetailsViewController.h */,
+				D1240C881C9037E900775B8D /* MMImageDetailsViewController.m */,
+				D1240C8A1C90414A00775B8D /* MMFlickrImage.h */,
+				D1240C8B1C90414A00775B8D /* MMFlickrImage.m */,
 			);
 			path = MMGalery;
 			sourceTree = "<group>";
@@ -140,6 +185,15 @@
 			path = MMGaleryUITests;
 			sourceTree = "<group>";
 		};
+		F8C060832157BDBF458CE2AB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				88917BBB32FCDC30284E5DEB /* Pods-MMGalery.debug.xcconfig */,
+				E1E826288663879E1E6C6298 /* Pods-MMGalery.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,9 +201,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D1D990A01C806FCE00BCEF5C /* Build configuration list for PBXNativeTarget "MMGalery" */;
 			buildPhases = (
+				CC2AF4951515387946EBCEB7 /* Check Pods Manifest.lock */,
 				D1D9906F1C806FCE00BCEF5C /* Sources */,
 				D1D990701C806FCE00BCEF5C /* Frameworks */,
 				D1D990711C806FCE00BCEF5C /* Resources */,
+				357E519A19351DBF6AB313F6 /* Embed Pods Frameworks */,
+				53999A1EA430B5643A804B1F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -265,14 +322,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		357E519A19351DBF6AB313F6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MMGalery/Pods-MMGalery-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53999A1EA430B5643A804B1F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MMGalery/Pods-MMGalery-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC2AF4951515387946EBCEB7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D1D9906F1C806FCE00BCEF5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1D9907E1C806FCE00BCEF5C /* ViewController.m in Sources */,
+				D1D9907E1C806FCE00BCEF5C /* MMImageBoardViewController.m in Sources */,
+				D1D990AB1C80739200BCEF5C /* MMImagesBoardView.m in Sources */,
+				D1240C801C8DAF2100775B8D /* MMFlickrManager.m in Sources */,
+				D1240C891C9037E900775B8D /* MMImageDetailsViewController.m in Sources */,
 				D1D9907B1C806FCE00BCEF5C /* AppDelegate.m in Sources */,
+				D1240C861C8DF00000775B8D /* MMImageView.m in Sources */,
+				D1240C831C8DD01F00775B8D /* UIImageView+Networking.m in Sources */,
 				D1D990781C806FCE00BCEF5C /* main.m in Sources */,
+				D1240C8C1C90414A00775B8D /* MMFlickrImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +520,7 @@
 		};
 		D1D990A11C806FCE00BCEF5C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88917BBB32FCDC30284E5DEB /* Pods-MMGalery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MMGalery/Info.plist;
@@ -420,6 +532,7 @@
 		};
 		D1D990A21C806FCE00BCEF5C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1E826288663879E1E6C6298 /* Pods-MMGalery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MMGalery/Info.plist;
@@ -496,6 +609,7 @@
 				D1D990A21C806FCE00BCEF5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D1D990A31C806FCE00BCEF5C /* Build configuration list for PBXNativeTarget "MMGaleryTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +618,7 @@
 				D1D990A51C806FCE00BCEF5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D1D990A61C806FCE00BCEF5C /* Build configuration list for PBXNativeTarget "MMGaleryUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +627,7 @@
 				D1D990A81C806FCE00BCEF5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

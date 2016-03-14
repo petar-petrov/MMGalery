@@ -1,0 +1,18 @@
+PODS:
+  - objectiveflickr (2.0.4)
+  - Reachability (3.2)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+
+DEPENDENCIES:
+  - objectiveflickr (~> 2.0)
+  - Reachability (~> 3.2)
+  - SDWebImage (~> 3.7)
+
+SPEC CHECKSUMS:
+  objectiveflickr: aed169dae1eb5a5550ca78f7efd7ccde2e4c26e5
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+
+COCOAPODS: 0.39.0
