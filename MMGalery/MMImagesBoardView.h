@@ -13,6 +13,12 @@
 
 @class MMImageView;
 
+typedef NS_ENUM(NSInteger, MMImagesBoardViewScrollPosition) {
+    MMImagesBoardViewScrollPositionTop,
+    MMImagesBoardViewScrollPositionMiddle,
+    MMImagesBoardViewScrollPositionBottom
+};
+
 @interface MMImagesBoardView : UIScrollView
 
 @property (weak, nonatomic) id <MMImagesBoardViewDelegate> imageBoardDelegate;
@@ -28,6 +34,8 @@
 
 - (void)reloadImageBoardView;
 - (void)reloadImageBoardViewAndStopLoadingIndicator;
+
+- (void)scrollToRowAtIndex:(NSInteger)index atScrollPosistion:(MMImagesBoardViewScrollPosition)position animated:(BOOL)animated;
 
 @end
 

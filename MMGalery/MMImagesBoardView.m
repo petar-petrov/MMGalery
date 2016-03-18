@@ -11,6 +11,8 @@
 #import "MMImageView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+#import "MMLoaderIndicatorView.h"
+
 @interface MMImagesBoardView () <UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSMutableSet *imageViewPool;
@@ -24,7 +26,13 @@
 
 @property (assign, nonatomic) NSInteger leftMargin;
 
-@property (strong, nonatomic) UIView *loadingIndicator;
+@property (strong, nonatomic) MMLoaderIndicatorView *loadingIndicator;
+
+@property (assign, nonatomic) NSInteger lastKnowFirstVisibleIndex;
+@property (assign, nonatomic) NSInteger lastKnowLastVisibleIndex;
+
+@property (assign, nonatomic) BOOL contentOffsetUpdatedOnRotation;
+@property (assign, nonatomic) CGFloat currentViewWidth;
 
 @end
 
@@ -71,6 +79,7 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
         
         _leftMargin = kImageBoardViewLeftMargin;
         
+        self.currentViewWidth = frame.size.width;
         self.contentSize = frame.size;
         self.delegate = self;
         
@@ -93,6 +102,8 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     
+    self.currentViewWidth = frame.size.width;
+    
     for (MMImageView *imageView in self.subviews) {
         if ([imageView isKindOfClass:[MMImageView class]]) {
             [self removeImageViewFromScrollViewImageView:imageView];
@@ -101,12 +112,31 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
     
     self.numberOfImagesPerRow = (NSUInteger)floor(frame.size.width / self.imageViewSideSize);
     
+    if (self.numberOfImagesPerRow == 0) {
+        self.numberOfImagesPerRow = kDefaultNumberOfImagesPerRow;
+    }
+    
     self.leftMargin = ceil(frame.size.width - (self.numberOfImagesPerRow * self.imageViewSideSize) - ((self.numberOfImagesPerRow - 1) * kImageBoardViewPadding)) / 2;
     
     [self calculateMaximumNumberOfImageViewOnScreen];
+    
+    self.contentOffsetUpdatedOnRotation = NO;
+    
+    [self reloadImageBoardView];
+    
+    NSLog(@"index %ld", self.lastKnowFirstVisibleIndex);
+    
+    [self scrollToRowAtIndex:self.lastKnowLastVisibleIndex atScrollPosistion:MMImagesBoardViewScrollPositionBottom animated:NO];
+
+    self.contentOffsetUpdatedOnRotation = YES;
+    
+    if (self.loadingNextPage) {
+        
+        self.loadingIndicator.frame = CGRectMake(self.loadingIndicator.frame.origin.x, self.contentSize.height - kLoadingIndicatorViewHeight, self.contentSize.width, kLoadingIndicatorViewHeight);
+    }
 }
 
-#pragma mark - Creating Image Board View Image Views
+#pragma mark - Creating Images Board View Image Views
 
 - (MMImageView *)dequeueReusableImageView {
     MMImageView *imageView = [self.imageViewPool anyObject];
@@ -124,45 +154,53 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
 
 #pragma mark - Accessing Image Views
 
-
-
 - (NSArray *)visibleViews {
     
     return [self imageViews];
 }
 
-#pragma mark - Reloading Image Board View
+#pragma mark - Scrolling the Images Board View
+
+- (void)scrollToRowAtIndex:(NSInteger)index atScrollPosistion:(MMImagesBoardViewScrollPosition)position animated:(BOOL)animated {
+    CGRect imageViewFrame = [self calculateFrameForImageViewAtIndex:index];
+    
+    CGRect rectToScrollTo;
+    
+    switch (position) {
+        case MMImagesBoardViewScrollPositionTop:
+            rectToScrollTo = CGRectMake(0.0f, imageViewFrame.origin.y, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+            break;
+        case MMImagesBoardViewScrollPositionMiddle:
+            rectToScrollTo = CGRectMake(0.0f, imageViewFrame.origin.y - CGRectGetMidY(self.bounds), CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+            break;
+        case MMImagesBoardViewScrollPositionBottom:
+            rectToScrollTo = CGRectMake(0.0f, imageViewFrame.origin.y + (CGRectGetHeight(self.bounds) - CGRectGetHeight(imageViewFrame)), CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+        default:
+            break;
+    }
+    
+    [self scrollRectToVisible:rectToScrollTo animated:animated];
+}
+
+#pragma mark - Reloading Images Board View
 
 - (void)reloadImageBoardView {
     [self loadImageViews];
 }
 
 - (void)reloadImageBoardViewAndStopLoadingIndicator {
-    [self reloadImageBoardView];
+     self.loadingNextPage = NO;
     
-    self.loadingNextPage = NO;
+    [self reloadImageBoardView];
 }
 
 #pragma mark - Subviews Configuration (Private)
 
 - (void)configureLoadingIndicatorView {
-    self.loadingIndicator = [[UIView alloc] initWithFrame:CGRectMake(0.0f, self.bounds.size.height - kLoadingIndicatorViewHeight, self.bounds.size.width, kLoadingIndicatorViewHeight)];
-    
-    // configure and add an activity indicator to loading indicator
-    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activityIndicatorView.center = CGPointMake(CGRectGetMidX(self.loadingIndicator.bounds), CGRectGetMidY(self.loadingIndicator.bounds));
-    activityIndicatorView.color = [[UIColor alloc]initWithRed: 0.219034 green: 0.598590 blue: 0.815217 alpha: 1 ];
-    
-    [self.loadingIndicator addSubview:activityIndicatorView];
-   
-    [activityIndicatorView startAnimating];
-    
-    // configure and add a message label to loading indicator
-    UILabel *label = [[UILabel alloc] init];
-    label.text = NSLocalizedString(@"Loading Images from Flickr", nil) ;
-    [label sizeToFit];
-    [self.loadingIndicator addSubview:label];
-    label.center = CGPointMake(CGRectGetMidX(self.loadingIndicator.bounds), CGRectGetMidY(self.loadingIndicator.bounds) + activityIndicatorView.bounds.size.height);
+    self.loadingIndicator = [[MMLoaderIndicatorView alloc] initWithFrame:CGRectMake(0.0f, self.contentSize.height - kLoadingIndicatorViewHeight, self.bounds.size.width, kLoadingIndicatorViewHeight)];
+    self.loadingIndicator.activityIndicatorColor = [[UIColor alloc]initWithRed: 0.219034 green: 0.598590 blue: 0.815217 alpha: 1 ];
+    [self.loadingIndicator startAnimating];
+    self.loadingIndicator.backgroundColor = [UIColor lightGrayColor];
 }
 
 #pragma mark - Private
@@ -212,6 +250,16 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
     // calculate the first and last indexes
     NSInteger firstVisibleIndex = MAX(0, floor((self.contentOffset.y - kImageBoardViewTopMargin) / (self.imageViewSideSize + kImageBoardViewPadding)) * self.numberOfImagesPerRow);
     NSInteger lastVisibleIndex = MIN([self.imageBoardDataSource numberOfImagesInImageBoardView:self], firstVisibleIndex + self.maxNumberOfImageViewOnScreen);
+    
+    if (self.contentOffsetUpdatedOnRotation && (self.currentViewWidth == self.frame.size.width)) {
+        self.lastKnowFirstVisibleIndex = firstVisibleIndex;
+        self.lastKnowLastVisibleIndex = lastVisibleIndex;
+        
+    } else {
+        NSLog(@"first index %ld, contentSize %@", firstVisibleIndex, NSStringFromCGPoint(self.contentOffset));
+    }
+    
+    
     
     // add only new image views to the scrollView
     for (NSInteger index = firstVisibleIndex; index < lastVisibleIndex; index++) {
@@ -297,19 +345,35 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
     
     CGFloat contentSizeHeight = (ceil((double)[self.imageBoardDataSource numberOfImagesInImageBoardView:self] / self.numberOfImagesPerRow) * self.imageViewSideSize) + ((ceil((double)[self.imageBoardDataSource numberOfImagesInImageBoardView:self] / self.numberOfImagesPerRow) - 1)  * kImageBoardViewPadding) + kImageBoardViewTopMargin + kImageBoardViewBottomMargin + loadingIndicatorHeight;
     
+//    NSLog(@"loading indicator height %f contentSizeHeight %f image side %ld", loadingIndicatorHeight, contentSizeHeight, self.imageViewSideSize);
+    
     self.contentSize = CGSizeMake(self.bounds.size.width, contentSizeHeight);
 }
 
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self reloadImageBoardView];
-    
+    [self loadImageViews];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (self.contentOffset.y + self.frame.size.height >= self.contentSize.height + kLoadingIndicatorViewHeight && !self.loadingNextPage) {
+        [self updateContentSize];
         NSLog(@"load next page");
         self.loadingNextPage = YES;
         
-        self.loadingIndicator.frame = CGRectMake(self.loadingIndicator.frame.origin.x, self.contentSize.height, self.loadingIndicator.frame.size.width, self.loadingIndicator.frame.size.height);
+        //[self configureLoadingIndicatorView];
+        self.loadingIndicator.frame = CGRectMake(self.loadingIndicator.frame.origin.x, self.contentSize.height, self.frame.size.width, kLoadingIndicatorViewHeight);
+        //        NSLog(@"content size %@ loading indicater frame %@", NSStringFromCGSize(self.contentSize), NSStringFromCGRect(self.loadingIndicator.frame));
+        
+        //[self configureLoadingIndicatorView];
+        
+        self.loadingIndicator.alpha = 0.5f;
+        
+        [UIView animateWithDuration:.5f animations:^{
+            self.loadingIndicator.alpha = 1.0f;
+        }];
+        
         
         [self addSubview:self.loadingIndicator];
         

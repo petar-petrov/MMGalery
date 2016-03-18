@@ -21,6 +21,8 @@
 
 @property (assign, nonatomic, getter=isZoomedIn) BOOL zoomedIn;
 
+@property (assign, nonatomic) CGFloat zoomingScale;
+
 @end
 
 @implementation MMImageDetailsViewController
@@ -35,7 +37,8 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.scrollView.delegate = self;
-    self.scrollView.backgroundColor = [UIColor blackColor];
+    self.scrollView.backgroundColor = [UIColor orangeColor];
+    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     self.imageView = [[UIImageView alloc] init];
     self.imageView.backgroundColor = [UIColor blackColor];
@@ -68,6 +71,18 @@
         [self.scrollView addSubview:self.imageView];
     }];
 }
+
+//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+//    NSLog(@"%@", NSStringFromCGSize(size));
+//    
+//    self.scrollView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
+//    
+//    CGFloat minScale = [self calculateMinScale];
+//    self.scrollView.minimumZoomScale = minScale;
+//    self.scrollView.zoomScale = minScale;
+//    
+//    [self centerScrollViewContent];
+//}
 
 #pragma mark - Private
 
@@ -139,6 +154,18 @@
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     [self centerScrollViewContent];
+}
+
+- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
+    self.zoomingScale = self.scrollView.zoomScale;
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
+    if (self.zoomingScale < scale) {
+        self.zoomedIn = NO;
+    } else {
+        self.zoomedIn = YES;
+    }
 }
 
 @end

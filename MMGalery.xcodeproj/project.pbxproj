@@ -13,6 +13,7 @@
 		D1240C861C8DF00000775B8D /* MMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1240C851C8DF00000775B8D /* MMImageView.m */; };
 		D1240C891C9037E900775B8D /* MMImageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1240C881C9037E900775B8D /* MMImageDetailsViewController.m */; };
 		D1240C8C1C90414A00775B8D /* MMFlickrImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D1240C8B1C90414A00775B8D /* MMFlickrImage.m */; };
+		D192E3E01C9839A200C9BEDD /* MMLoaderIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = D192E3DF1C9839A100C9BEDD /* MMLoaderIndicatorView.m */; };
 		D1D990781C806FCE00BCEF5C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D990771C806FCE00BCEF5C /* main.m */; };
 		D1D9907B1C806FCE00BCEF5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D9907A1C806FCE00BCEF5C /* AppDelegate.m */; };
 		D1D9907E1C806FCE00BCEF5C /* MMImageBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D9907D1C806FCE00BCEF5C /* MMImageBoardViewController.m */; };
@@ -54,6 +55,8 @@
 		D1240C881C9037E900775B8D /* MMImageDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMImageDetailsViewController.m; sourceTree = "<group>"; };
 		D1240C8A1C90414A00775B8D /* MMFlickrImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMFlickrImage.h; sourceTree = "<group>"; };
 		D1240C8B1C90414A00775B8D /* MMFlickrImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMFlickrImage.m; sourceTree = "<group>"; };
+		D192E3DE1C9839A100C9BEDD /* MMLoaderIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMLoaderIndicatorView.h; sourceTree = "<group>"; };
+		D192E3DF1C9839A100C9BEDD /* MMLoaderIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMLoaderIndicatorView.m; sourceTree = "<group>"; };
 		D1D990731C806FCE00BCEF5C /* MMGalery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMGalery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D990771C806FCE00BCEF5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D1D990791C806FCE00BCEF5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -109,6 +112,50 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D192E3DD1C98398400C9BEDD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D192E3DE1C9839A100C9BEDD /* MMLoaderIndicatorView.h */,
+				D192E3DF1C9839A100C9BEDD /* MMLoaderIndicatorView.m */,
+				D1240C841C8DF00000775B8D /* MMImageView.h */,
+				D1240C851C8DF00000775B8D /* MMImageView.m */,
+				D1D990A91C80739200BCEF5C /* MMImagesBoardView.h */,
+				D1D990AA1C80739200BCEF5C /* MMImagesBoardView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		D192E3E11C9839CB00C9BEDD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D1D9907C1C806FCE00BCEF5C /* MMImageBoardViewController.h */,
+				D1D9907D1C806FCE00BCEF5C /* MMImageBoardViewController.m */,
+				D1240C871C9037E900775B8D /* MMImageDetailsViewController.h */,
+				D1240C881C9037E900775B8D /* MMImageDetailsViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		D192E3E21C9839F100C9BEDD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D1240C7E1C8DAF2100775B8D /* MMFlickrManager.h */,
+				D1240C7F1C8DAF2100775B8D /* MMFlickrManager.m */,
+				D1240C8A1C90414A00775B8D /* MMFlickrImage.h */,
+				D1240C8B1C90414A00775B8D /* MMFlickrImage.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D192E3E31C983A0400C9BEDD /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				D1240C811C8DD01F00775B8D /* UIImageView+Networking.h */,
+				D1240C821C8DD01F00775B8D /* UIImageView+Networking.m */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 		D1D9906A1C806FCE00BCEF5C = {
 			isa = PBXGroup;
 			children = (
@@ -134,27 +181,17 @@
 		D1D990751C806FCE00BCEF5C /* MMGalery */ = {
 			isa = PBXGroup;
 			children = (
+				D192E3E31C983A0400C9BEDD /* Utility */,
+				D192E3E21C9839F100C9BEDD /* Model */,
+				D192E3DD1C98398400C9BEDD /* View */,
+				D192E3E11C9839CB00C9BEDD /* Controllers */,
 				D1D990791C806FCE00BCEF5C /* AppDelegate.h */,
 				D1D9907A1C806FCE00BCEF5C /* AppDelegate.m */,
-				D1D9907C1C806FCE00BCEF5C /* MMImageBoardViewController.h */,
-				D1D9907D1C806FCE00BCEF5C /* MMImageBoardViewController.m */,
-				D1240C811C8DD01F00775B8D /* UIImageView+Networking.h */,
-				D1240C821C8DD01F00775B8D /* UIImageView+Networking.m */,
 				D1D9907F1C806FCE00BCEF5C /* Main.storyboard */,
 				D1D990821C806FCE00BCEF5C /* Assets.xcassets */,
 				D1D990841C806FCE00BCEF5C /* LaunchScreen.storyboard */,
 				D1D990871C806FCE00BCEF5C /* Info.plist */,
 				D1D990761C806FCE00BCEF5C /* Supporting Files */,
-				D1D990A91C80739200BCEF5C /* MMImagesBoardView.h */,
-				D1D990AA1C80739200BCEF5C /* MMImagesBoardView.m */,
-				D1240C7E1C8DAF2100775B8D /* MMFlickrManager.h */,
-				D1240C7F1C8DAF2100775B8D /* MMFlickrManager.m */,
-				D1240C841C8DF00000775B8D /* MMImageView.h */,
-				D1240C851C8DF00000775B8D /* MMImageView.m */,
-				D1240C871C9037E900775B8D /* MMImageDetailsViewController.h */,
-				D1240C881C9037E900775B8D /* MMImageDetailsViewController.m */,
-				D1240C8A1C90414A00775B8D /* MMFlickrImage.h */,
-				D1240C8B1C90414A00775B8D /* MMFlickrImage.m */,
 			);
 			path = MMGalery;
 			sourceTree = "<group>";
@@ -382,6 +419,7 @@
 				D1D9907B1C806FCE00BCEF5C /* AppDelegate.m in Sources */,
 				D1240C861C8DF00000775B8D /* MMImageView.m in Sources */,
 				D1240C831C8DD01F00775B8D /* UIImageView+Networking.m in Sources */,
+				D192E3E01C9839A200C9BEDD /* MMLoaderIndicatorView.m in Sources */,
 				D1D990781C806FCE00BCEF5C /* main.m in Sources */,
 				D1240C8C1C90414A00775B8D /* MMFlickrImage.m in Sources */,
 			);

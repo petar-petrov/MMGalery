@@ -57,6 +57,8 @@
     
     self.title = @"Flickr";
     
+//    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.manager = [MMFlickrManager defaultManager];
     
     self.manager.flickrManagerDelegate = self;
@@ -83,11 +85,12 @@
     
     CGRect newFrame = CGRectMake(self.boardView.frame.origin.x, self.boardView.frame.origin.y, size.width, size.height);
     
-    NSLog(@"Rotation %@", NSStringFromCGRect(newFrame));
+//    NSLog(@"Rotation %@", NSStringFromCGRect(newFrame));
     
     self.boardView.frame = newFrame;
     
-    [self.boardView reloadImageBoardView];
+//    [self.boardView reloadImageBoardView];
+
 }
 
 #pragma mark - MMFlickrManagerDelegate 
