@@ -69,8 +69,6 @@
     self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.activityIndicatorView.color = self.activityIndicatorColor;
     
-//    self.activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
-    
     [self addSubview:self.activityIndicatorView];
     
     self.message = [[UILabel alloc] init];
@@ -78,11 +76,7 @@
     self.message.text = NSLocalizedString(@"Loading Images from Flickr", nil);
     [self.message sizeToFit];
     
-//    self.translatesAutoresizingMaskIntoConstraints = NO;
-    
     [self addSubview:self.message];
-    
-//    [self updateConstraintsIfNeeded];
     
     CGFloat centerOffset = floor((self.activityIndicatorView.bounds.size.height + self.message.bounds.size.height) / 2.0f);
     CGFloat activityIndicatorCenterY = ceil(centerOffset - CGRectGetMidY(self.activityIndicatorView.bounds));
@@ -91,21 +85,5 @@
     self.message.center = CGPointMake(CGRectGetMidX(self.bounds), self.activityIndicatorView.center.y + centerOffset);
 
 }
-
-//- (void)updateConstraints {
-//    
-//    if (!self.isContraintsSet) {
-//        
-//        [self.activityIndicatorView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
-//        [self.activityIndicatorView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor].active = YES;
-//        
-//        [self.message.topAnchor constraintEqualToAnchor:self.activityIndicatorView.topAnchor].active = YES;
-//        [self.message.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
-//        
-//        self.constraintsSet = YES;
-//    }
-//    
-//    [super updateConstraints];
-//}
 
 @end

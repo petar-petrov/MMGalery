@@ -31,6 +31,12 @@
 @property (assign, nonatomic) NSInteger lastKnowFirstVisibleIndex;
 @property (assign, nonatomic) NSInteger lastKnowLastVisibleIndex;
 
+@property (assign, nonatomic) NSInteger lastKnowFirstVisibleIndexBeforeRotation;
+
+@property (assign, nonatomic, getter=isScrollViewMoved) BOOL scrollViewMoved;
+
+@property (assign, nonatomic) CGFloat percent;
+
 @property (assign, nonatomic) BOOL contentOffsetUpdatedOnRotation;
 @property (assign, nonatomic) CGFloat currentViewWidth;
 
@@ -79,6 +85,8 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
         
         _leftMargin = kImageBoardViewLeftMargin;
         
+        self.contentOffsetUpdatedOnRotation = YES;
+        
         self.currentViewWidth = frame.size.width;
         self.contentSize = frame.size;
         self.delegate = self;
@@ -91,10 +99,27 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
         
         [self configureLoadingIndicatorView];
         
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:UIDeviceOrientationDidChangeNotification
+                                                          object:nil
+                                                           queue:[NSOperationQueue mainQueue]
+                                                      usingBlock:^(NSNotification *note){
+                                                          [self scrollToRowAtIndex:self.lastKnowFirstVisibleIndex atScrollPosistion:MMImagesBoardViewScrollPositionTop animated:NO];
+                                                          
+                                                          self.contentOffsetUpdatedOnRotation = YES;
+                                                      }];
+        
         [self loadImageViews];
+        
+        
     }
     
     return self;
+}
+
+- (void)dealloc {
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 }
 
 #pragma mark - Manipulate View Frame
@@ -123,12 +148,6 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
     self.contentOffsetUpdatedOnRotation = NO;
     
     [self reloadImageBoardView];
-    
-    NSLog(@"index %ld", self.lastKnowFirstVisibleIndex);
-    
-    [self scrollToRowAtIndex:self.lastKnowLastVisibleIndex atScrollPosistion:MMImagesBoardViewScrollPositionBottom animated:NO];
-
-    self.contentOffsetUpdatedOnRotation = YES;
     
     if (self.loadingNextPage) {
         
@@ -168,7 +187,7 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
     
     switch (position) {
         case MMImagesBoardViewScrollPositionTop:
-            rectToScrollTo = CGRectMake(0.0f, imageViewFrame.origin.y, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+            rectToScrollTo = CGRectMake(0.0f, imageViewFrame.origin.y - self.contentInset.top, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
             break;
         case MMImagesBoardViewScrollPositionMiddle:
             rectToScrollTo = CGRectMake(0.0f, imageViewFrame.origin.y - CGRectGetMidY(self.bounds), CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
@@ -255,8 +274,13 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
         self.lastKnowFirstVisibleIndex = firstVisibleIndex;
         self.lastKnowLastVisibleIndex = lastVisibleIndex;
         
-    } else {
-        NSLog(@"first index %ld, contentSize %@", firstVisibleIndex, NSStringFromCGPoint(self.contentOffset));
+        CGRect firstVisibleIndexFrame = [self calculateFrameForImageViewAtIndex:firstVisibleIndex];
+        
+        if (firstVisibleIndexFrame.origin.y + CGRectGetHeight(firstVisibleIndexFrame) < self.contentOffset.y + self.contentInset.top && self.isScrollViewMoved) {
+            self.lastKnowFirstVisibleIndex = firstVisibleIndex + self.numberOfImagesPerRow;
+        }
+        
+        self.scrollViewMoved = NO;
     }
     
     
@@ -345,8 +369,6 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
     
     CGFloat contentSizeHeight = (ceil((double)[self.imageBoardDataSource numberOfImagesInImageBoardView:self] / self.numberOfImagesPerRow) * self.imageViewSideSize) + ((ceil((double)[self.imageBoardDataSource numberOfImagesInImageBoardView:self] / self.numberOfImagesPerRow) - 1)  * kImageBoardViewPadding) + kImageBoardViewTopMargin + kImageBoardViewBottomMargin + loadingIndicatorHeight;
     
-//    NSLog(@"loading indicator height %f contentSizeHeight %f image side %ld", loadingIndicatorHeight, contentSizeHeight, self.imageViewSideSize);
-    
     self.contentSize = CGSizeMake(self.bounds.size.width, contentSizeHeight);
 }
 
@@ -354,6 +376,11 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self loadImageViews];
+    
+    if (self.contentOffsetUpdatedOnRotation) {
+        self.scrollViewMoved = YES;
+    }
+    
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -362,11 +389,7 @@ static NSUInteger kDefaultNumberOfImagesPerRow = 4;
         NSLog(@"load next page");
         self.loadingNextPage = YES;
         
-        //[self configureLoadingIndicatorView];
         self.loadingIndicator.frame = CGRectMake(self.loadingIndicator.frame.origin.x, self.contentSize.height, self.frame.size.width, kLoadingIndicatorViewHeight);
-        //        NSLog(@"content size %@ loading indicater frame %@", NSStringFromCGSize(self.contentSize), NSStringFromCGRect(self.loadingIndicator.frame));
-        
-        //[self configureLoadingIndicatorView];
         
         self.loadingIndicator.alpha = 0.5f;
         

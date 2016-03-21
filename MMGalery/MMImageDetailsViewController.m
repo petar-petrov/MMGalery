@@ -22,6 +22,11 @@
 @property (assign, nonatomic, getter=isZoomedIn) BOOL zoomedIn;
 
 @property (assign, nonatomic) CGFloat zoomingScale;
+@property (assign, nonatomic) CGFloat storedScale;
+
+@property (strong, nonatomic) UIImage *image;
+
+@property (nonatomic) CGRect imageZoomRect;
 
 @end
 
@@ -31,13 +36,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //self.scrollView.zoomScale = 1.0f;
-    
     self.title = self.imageInfo.title;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.scrollView.delegate = self;
-    self.scrollView.backgroundColor = [UIColor orangeColor];
+    self.scrollView.backgroundColor = [UIColor blackColor];
     self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     self.imageView = [[UIImageView alloc] init];
@@ -48,12 +51,36 @@
     tapGesture.numberOfTouchesRequired = 1;
     
     [self.scrollView addGestureRecognizer:tapGesture];
+    
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIDeviceOrientationDidChangeNotification
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      self.scrollView.contentSize = self.image.size;
+                                                      
+                                                      self.scrollView.frame = self.view.frame;
+                                              
+                                                      CGFloat minScale = [self calculateMinScale];
+                                                      self.scrollView.minimumZoomScale = minScale;
+                                                      self.scrollView.zoomScale = minScale;
+                                                      
+                                                      if (self.storedScale != 0) {
+                                                          self.scrollView.zoomScale = self.storedScale;
+                                                      }
+                                                      
+                                                    
+                                                      [self centerScrollViewContent];
+                                                }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     [self.imageView sd_setImageWithURL:self.imageInfo.largeImageURL placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType type, NSURL *imageURL) {
+        self.image = image;
+        
         self.scrollView.contentSize = image.size;
         
         self.imageView.frame = CGRectMake(0.0f, 0.0f, image.size.width, image.size.height);
@@ -72,17 +99,9 @@
     }];
 }
 
-//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-//    NSLog(@"%@", NSStringFromCGSize(size));
-//    
-//    self.scrollView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
-//    
-//    CGFloat minScale = [self calculateMinScale];
-//    self.scrollView.minimumZoomScale = minScale;
-//    self.scrollView.zoomScale = minScale;
-//    
-//    [self centerScrollViewContent];
-//}
+- (void)viewWillDisappear:(BOOL)animated {
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+}
 
 #pragma mark - Private
 
@@ -90,9 +109,9 @@
     
     CGPoint pointInView = [gesture locationInView:self.imageView];
     
-    CGRect rectToZoomTo = [self zoomRectForPoint:pointInView];
+    self.imageZoomRect = [self zoomRectForPoint:pointInView];
     
-    [self.scrollView zoomToRect:rectToZoomTo animated:YES];
+    [self.scrollView zoomToRect:self.imageZoomRect animated:YES];
 }
 
 - (CGRect)zoomRectForPoint:(CGPoint)point {
@@ -158,6 +177,7 @@
 
 - (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
     self.zoomingScale = self.scrollView.zoomScale;
+    self.storedScale = 0;
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
@@ -166,6 +186,8 @@
     } else {
         self.zoomedIn = YES;
     }
+    
+    self.storedScale = scale;
 }
 
 @end

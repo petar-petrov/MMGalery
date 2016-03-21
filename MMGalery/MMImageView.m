@@ -13,7 +13,7 @@
 @interface MMImageView ()
 
 @property (strong, nonatomic) NSURLSessionDataTask *dataTask;
-@property (strong, nonatomic) dispatch_queue_t imageLoadingQueue;
+//@property (strong, nonatomic) dispatch_queue_t imageLoadingQueue;
 
 @end
 
@@ -24,7 +24,7 @@
     
     if (self) {
         self.backgroundColor = [[UIColor alloc]initWithRed: 0.956863 green: 0.956863 blue: 0.956863 alpha: 1 ];
-        self.imageLoadingQueue = dispatch_queue_create("com.mmgalery.imageloading", 0);
+//        self.imageLoadingQueue = dispatch_queue_create("com.mmgalery.imageloading", 0);
     }
     
     return self;

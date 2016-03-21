@@ -45,7 +45,6 @@ typedef NS_ENUM(NSInteger, MMImagesBoardViewScrollPosition) {
 
 - (void)requestNextPage;
 - (void)imageBoardView:(MMImagesBoardView *)imageBoardView didSelectImageViewAtIndex:(NSUInteger)index;
-//- (void)numberOfImageVeiwsPerRow; // default is 3
 
 @end
 
